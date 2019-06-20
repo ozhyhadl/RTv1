@@ -1,0 +1,1 @@
+gcc -g main.c ft_oper.c ft_plane.c ft_calcl_oper.c ft_light.c -lmlx -framework OpenGL -framework AppKit libft/libft.a
