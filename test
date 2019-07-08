@@ -1,0 +1,3 @@
+add spher 5 5 5 
+Add spher "cord"( x y z ) "color"( R G B ) "radius" r  "specular"  s 
+limits -100 000 > n < 100 000 
