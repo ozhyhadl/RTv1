@@ -6,7 +6,7 @@
 /*   By: ozhyhadl <ozhyhadl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/22 18:45:55 by ozhyhadl          #+#    #+#             */
-/*   Updated: 2019/07/04 00:39:25 by ozhyhadl         ###   ########.fr       */
+/*   Updated: 2019/07/08 21:47:05 by ozhyhadl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,38 +15,22 @@
 int	ft_cilind_light(t_rtv *r, t_cilindr *cilindr, double lim, double *d)
 {
 	double		p[3];
-	double		n[3];
 	double		tm[3];
-	double		oc[3];
-	double		len_n;
 	double		i;
 	int			color[3];
 	int			int_color;
 	double		tmp_d[3];
-	double m;
-	double t;
-
-
+	double		t;
 
 	MUL13(tm, cilindr->t, d);
 	ADD3(tm, r->cam->o, tm);
 	SUB3(tm, tm, cilindr->start);
-	
 	t = ft_dot_p(tm, cilindr->vec);
 	MUL13(tmp_d, t, cilindr->vec);
 	SUB3(tm, tm, tmp_d);
 	ft_normalization(tm);
-
 	MUL13(tmp_d, lim, d);
 	ADD3(p, r->cam->o, tmp_d);
-	// // SUB3(oc, p, cilindr->start);
-	// SUB3(oc, r->cam->o, cilindr->start);
-	// m = ft_dot_p(d, cilindr->vec) * lim + ft_dot_p(oc, cilindr->vec);
-	// MUL13(tmp_d, m, cilindr->vec);
-	// SUB3(tm, p, cilindr->start);
-	// SUB3(n, tm, tmp_d)
-	// ft_normalization(n);
-
 	MUL13(tmp_d, -1, d);
 	i = ft_calc_light(p, tm, r, tmp_d);
 	if (i > 1.2)
@@ -54,7 +38,6 @@ int	ft_cilind_light(t_rtv *r, t_cilindr *cilindr, double lim, double *d)
 	i = i > 1 ? 1 : i;
 	MUL13(color, i, cilindr->color);
 	GETC(int_color, color);
-
 	return (int_color);
 }
 

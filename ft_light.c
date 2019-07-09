@@ -6,7 +6,7 @@
 /*   By: ozhyhadl <ozhyhadl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 18:30:02 by ozhyhadl          #+#    #+#             */
-/*   Updated: 2019/07/08 21:10:27 by ozhyhadl         ###   ########.fr       */
+/*   Updated: 2019/07/09 19:44:02 by ozhyhadl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,19 +67,18 @@ double		ft_calc_light_2(double *p, double *n, t_rtv *r, double *vec)
 	l = r->light_choose;
 	i = 0;
 
-	if (l->type == 'd')
+	// if (l->type == 'd')
+	// {
+	// 	INCOR(vec, l->pos[0] + 1, l->pos[1] + 1, l->pos[2] * -1);
+	// 	max = INF;
+	// }
+	if (l->type == 'p')
 	{
-		INCOR(vec, l->pos[0] + 1, l->pos[1] + 1, l->pos[2] * -1);
-		max = INF;
-	}
-	else if (l->type == 'p')
-	{
-		
 		SUB3(vec, l->pos, p);
 		max = 1;
 	}
 	
-	if (ft_quadratic(r, vec, max, p) >= max && all_plane(r, vec, p) > max && all_cilindr(r, vec, p, r->cilindr) > max && all_cone(r, vec, p, r->cone) > max)
+	if (ft_quadratic(r, vec, max, p) >= max && all_plane(r, vec, p) >= max && all_cilindr(r, vec, p, r->cilindr) >= max && all_cone(r, vec, p, r->cone) >= max)
 		if ((dot = ft_dot_p(n, vec)) > 0)
 		{
 			len_n = sqrt(ft_dot_p(n, n));

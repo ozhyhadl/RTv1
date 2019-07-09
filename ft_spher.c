@@ -6,7 +6,7 @@
 /*   By: ozhyhadl <ozhyhadl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 02:38:45 by ozhyhadl          #+#    #+#             */
-/*   Updated: 2019/07/08 21:07:33 by ozhyhadl         ###   ########.fr       */
+/*   Updated: 2019/07/08 22:16:00 by ozhyhadl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	ft_trace_r2(t_rtv *r, void *figure, double lim, double *d)
 	double		p[3];
 	double		n[3];
 	double		tm[3];
-	double		len_n;
 	double		i;
 	int			color[3];
 	int			int_color;
@@ -28,8 +27,7 @@ int	ft_trace_r2(t_rtv *r, void *figure, double lim, double *d)
 	MUL13(tm, lim, d);
 	ADD3(p, r->cam->o, tm);
 	SUB3(n, p, t->center);
-	len_n = sqrt(ft_dot_p(n, n));
-	MUL13(n, 1.0 / len_n, n);
+	ft_normalization(n);
 	MUL13(tmp_d, -1, d);
 	i = ft_calc_light(p, n, r, tmp_d);
 	if (i > 1.4)

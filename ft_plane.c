@@ -6,7 +6,7 @@
 /*   By: ozhyhadl <ozhyhadl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 19:02:18 by ozhyhadl          #+#    #+#             */
-/*   Updated: 2019/06/23 18:30:46 by ozhyhadl         ###   ########.fr       */
+/*   Updated: 2019/07/09 20:04:32 by ozhyhadl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_plane_light(t_rtv *r, t_plane *figure, double lim, double *d)
 
 	MUL13(tm, lim, d);
 	ADD3(p, r->cam->o, tm);
-	INCOR(n, figure->normal[0], figure->normal[1], figure->normal[2]);
+	INCOR(n, figure->vec[0], figure->vec[1], figure->vec[2]);
 	ft_normalization(n);
 	MUL13(tmp_d, -1, d);
 	i = ft_calc_light(p, n, r, tmp_d);
@@ -48,11 +48,11 @@ double	ft_plane_calc(t_plane *plane, double *d, double *p)
 	
 	SUB3(oc, p, plane->center);
 	MUL13(oc, -1, oc);
-	INCOR(n, plane->normal[0], plane->normal[1], plane->normal[2]);
+	INCOR(n, plane->vec[0], plane->vec[1], plane->vec[2]);
 	ft_normalization(n);
 		if (ft_dot_p(d, n) > 0)
 		{
-		MUL13(plane->normal, -1, plane->normal);
+		MUL13(plane->vec, -1, plane->vec);
 		}
 	k1 = ft_dot_p(oc, n);
 	k2 = ft_dot_p(d, n);

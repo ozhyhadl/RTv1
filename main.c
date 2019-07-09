@@ -6,7 +6,7 @@
 /*   By: ozhyhadl <ozhyhadl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 18:21:54 by ozhyhadl          #+#    #+#             */
-/*   Updated: 2019/07/08 20:59:18 by ozhyhadl         ###   ########.fr       */
+/*   Updated: 2019/07/09 21:35:27 by ozhyhadl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,44 +52,53 @@ int				ft_key_r(int key, t_rtv *rtv)
 	{
 		INCOR(rtv->cam->o, rtv->cam->o[0], rtv->cam->o[1] - 1,rtv->cam->o[2]);
 	}
+	else if (key == KEY_W)
+		rtv->x_angle += ANGLE;
+	else if (key == KEY_S)
+		rtv->x_angle -= ANGLE;
+	else if (key == KEY_D)
+		rtv->y_angle += ANGLE;
+	else if (key == KEY_A)
+		rtv->y_angle -= ANGLE;
+	
 	mlx_clear_window(rtv->ws->ptr, rtv->ws->win);
 	ft_main_alg(rtv);
 	return (0);
 }
-t_spher		*add_spher(t_spher *sp)
-{
-	t_spher *tmp;
+// t_spher		*add_spher(t_spher *sp)
+// {
+// 	t_spher *tmp;
 
-	if (sp == NULL)
-	{		
-		sp = malloc(sizeof(t_spher));
-		INCOR(sp->center, -2, 0, 4);
-		sp->name = ft_strdup("spher");
-		sp->radius = 1;
-		sp->specular = 500;
-		INCOR(sp->color, 0, 0, 255);
-		sp->next = NULL;
-	}		
-		tmp = malloc(sizeof(t_spher));
-		INCOR(tmp->center, 2, 0, 4);
-		tmp->name = ft_strdup("spher");
-		tmp->radius = 1;
-		tmp->specular = 10;
-		INCOR(tmp->color, 0, 255, 0);
-		tmp->next = sp;
-		sp = tmp;
+// 	if (sp == NULL)
+// 	{		
+// 		sp = malloc(sizeof(t_spher));
+// 		INCOR(sp->center, -2, 0, 4);
+// 		sp->name = ft_strdup("spher");
+// 		sp->radius = 1;
+// 		sp->specular = 500;
+// 		INCOR(sp->color, 0, 0, 255);
+// 		sp->next = NULL;
+// 	}		
+// 		tmp = malloc(sizeof(t_spher));
+// 		INCOR(tmp->center, 2, 0, 4);
+// 		tmp->name = ft_strdup("spher");
+// 		tmp->radius = 1;
+// 		tmp->specular = 10;
+// 		INCOR(tmp->color, 0, 255, 0);
+// 		tmp->next = sp;
+// 		sp = tmp;
 
-		tmp = malloc(sizeof(t_spher));
-		INCOR(tmp->center, 0, 0.4, 3);
-		tmp->name = ft_strdup("spher");
-		tmp->radius = 1;
-		tmp->specular = 500;
-		INCOR(tmp->color, 255, 0, 0);
-		tmp->next = sp;
-		sp = tmp;
+// 		tmp = malloc(sizeof(t_spher));
+// 		INCOR(tmp->center, 0, 0.4, 3);
+// 		tmp->name = ft_strdup("spher");
+// 		tmp->radius = 1;
+// 		tmp->specular = 500;
+// 		INCOR(tmp->color, 255, 0, 0);
+// 		tmp->next = sp;
+// 		sp = tmp;
 
-	return (sp);
-}
+// 	return (sp);
+// }
 
 t_light		*ft_init_light()
 {
@@ -104,92 +113,91 @@ t_light		*ft_init_light()
 	tmp = malloc(sizeof(t_light));
 	tmp->next = l;
 	l = tmp;
-	tmp->type = 'd';
+	tmp->type = 'p';
 	tmp->intensity = 0.2;
-	INCOR(tmp->pos, 0, 0, 4);
+	INCOR(tmp->pos, 0, 10, -10);
 
 	tmp = malloc(sizeof(t_light));
 	tmp->next = l;
 	l = tmp;
 	tmp->type = 'p';
 	tmp->intensity = 0.6;
-	INCOR(tmp->pos, 3, 10, -50);
+	INCOR(tmp->pos, 5, 10, -10);
 
 	return (l);
 }
 void	ft_init_start(t_cam *c)
 {
 	c->o[0] = 0;
-	c->o[1] = 1;
-	c->o[2] = -15;
+	c->o[1] = 10;
+	c->o[2] = -35;
 }
 
-t_cilindr		*add_cilindr(void)
-{
-	t_cilindr	*c;
+// t_cilindr		*add_cilindr(void)
+// {
+// 	t_cilindr	*c;
 
-	c = malloc(sizeof(t_cilindr));
-	INCOR(c->start, -5, 10, 5);
-	INCOR(c->vec, 0, 1, 0);
-	c->name = ft_strdup("cilindr");
-	c->radius = 1;
-	// SUB3(c->vec, c->start, c->end);
-	ft_normalization(c->vec);
-	INCOR(c->color, 180, 180, 180);
-	c->specular = 100;
-	c->next = NULL;
+// 	c = malloc(sizeof(t_cilindr));
+// 	INCOR(c->start, -5, 10, 5);
+// 	INCOR(c->vec, 0, 1, 0);
+// 	c->name = ft_strdup("cilindr");
+// 	c->radius = 1;
+// 	ft_normalization(c->vec);
+// 	INCOR(c->color, 180, 180, 180);
+// 	c->specular = 100;
+// 	c->next = NULL;
 	
 
-	return (c);
-}
+// 	return (c);
+// }
 
-t_cone		*add_cone(void)
-{
-	t_cone	*c;
+// t_cone		*add_cone(void)
+// {
+// 	t_cone	*c;
 
-	c = malloc(sizeof(t_cone));
-	INCOR(c->start, 0 / 38, 300 / 38, 10);
-	INCOR(c->vec, 0, 1, 0);
-	c->tang = tan(180 / (180 * 3.14));
-	c->name = ft_strdup("cone");
-	ft_normalization(c->vec);
-	INCOR(c->color, 255, 0, 0);
-	c->specular = 1000;
-	c->next = NULL;
+// 	c = malloc(sizeof(t_cone));
+// 	INCOR(c->start, 0 / 38, 300 / 38, 10);
+// 	INCOR(c->vec, 0, 1, 0);
+// 	c->tang = tan(180 / (180 * 3.14));
+// 	c->name = ft_strdup("cone");
+// 	ft_normalization(c->vec);
+// 	INCOR(c->color, 255, 0, 0);
+// 	c->specular = 1000;
+// 	c->next = NULL;
 
-	return (c);
-}
+// 	return (c);
+// }
 
-t_plane			*add_plane(void)
-{
-	t_plane *plane;
-	t_plane *tmp;
+// t_plane			*add_plane(void)
+// {
+// 	t_plane *plane;
+// 	t_plane *tmp;
 
-	plane = malloc(sizeof(t_plane));
-	INCOR(plane->center, 0, 0, 0);
-	INCOR(plane->normal, 0, 1, 0);
-	plane->name = ft_strdup("plane");
-	plane->specular = 1000;
-	INCOR(plane->color, 192, 192, 192);
-	plane->next = NULL;
+// 	// plane = malloc(sizeof(t_plane));
+// 	// INCOR(plane->center, 0, -10, 0);
+// 	// INCOR(plane->vec, 0, 1, 0);
+// 	// plane->name = ft_strdup("plane");
+// 	// plane->specular = 1000;
+// 	// INCOR(plane->color, 192, 192, 192);
+// 	// plane->next = NULL;
 
-	tmp = malloc(sizeof(t_plane));
-	INCOR(tmp->center, 0, 0, 20);
-	INCOR(tmp->normal, 0, 0, 1);
-	tmp->name = ft_strdup("plane");
-	tmp->specular = 10000000 ;
-	INCOR(tmp->color, 191, 191, 255);
-	tmp->next = plane;
-	plane = tmp;
+// 	// tmp = malloc(sizeof(t_plane));
+// 	// INCOR(tmp->center, 0, 0, 20);
+// 	// INCOR(tmp->vec, 0, 0, 1);
+// 	// tmp->name = ft_strdup("plane");
+// 	// tmp->specular = 10000000 ;
+// 	// INCOR(tmp->color, 191, 191, 255);
+// 	// tmp->next = plane;
+// 	// plane = tmp;
 
-	return(plane);
-}
+// 	return(plane);
+// }
 static t_rtv	*ft_creat_wspace(void)
 {
 	t_rtv		*rtv;
 	t_wspace	*s;
 	t_cam		*cam;
-	t_spher		*sp;
+	// t_spher		*sp;
 	t_light		*light;
 
 	rtv = malloc(sizeof(t_rtv));
@@ -198,17 +206,19 @@ static t_rtv	*ft_creat_wspace(void)
 
 	light = ft_init_light();
 
-	sp = add_spher(NULL);
+	// sp = add_spher(NULL);
 	s->ptr = mlx_init();
 	s->win = mlx_new_window(s->ptr, WIDTH, HEIGHT, "RTv1");
 	ft_init_start(cam);
 	rtv->ws = s;
 	rtv->cam = cam;
-	rtv->spher = sp;
+	rtv->spher = NULL;
 	rtv->light = light;
-	rtv->plane = add_plane();
-	rtv->cilindr = add_cilindr();
-	rtv->cone = add_cone();
+	rtv->plane = NULL;
+	rtv->cilindr = NULL;
+	rtv->cone = NULL;
+	rtv->x_angle = 0;
+	rtv->y_angle = 0;
 	return (rtv);
 }
 
@@ -218,11 +228,11 @@ int		main(int argc, char **argv)
 	t_rtv	*rtv;
 
 	rtv = ft_creat_wspace();
-	// if (main_parse("test1", rtv))
-	// 	{
-	// 		printf("ERROR\n");
-	// 		return (0);
-	// 	}
+	if (main_parse("test1", rtv))
+		{
+			ft_putstr("ERROR MAP\n");
+			return (0);
+		}
 	ft_main_alg(rtv);
 	mlx_hook(rtv->ws->win, 2, 5, ft_key_r, rtv);
 	mlx_hook(rtv->ws->win, 4, 5, ft_mouse_p, rtv);

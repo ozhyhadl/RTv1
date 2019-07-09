@@ -6,7 +6,7 @@
 /*   By: ozhyhadl <ozhyhadl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 20:10:10 by ozhyhadl          #+#    #+#             */
-/*   Updated: 2019/07/08 21:06:17 by ozhyhadl         ###   ########.fr       */
+/*   Updated: 2019/07/09 21:35:04 by ozhyhadl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,6 @@ static void	ft_calc_d(double *d, double x, double y)
 double	ft_dot_p(double *first, double *second)
 {
 	return (first[0] * second[0] + first[1] * second[1] + first[2] * second[2]);
-}
-static void ft_sub(double *oc, double *center, double *camera)
-{
-	oc[0] = camera[0] - center[0];
-	oc[1] = camera[1] - center[1];
-	oc[2] = camera[2] - center[2];
 }
 
 static int	ft_trace_ray(t_rtv *r, double *d, double min, double max)
@@ -89,7 +83,13 @@ void	ft_main_alg(t_rtv *r)
 		y = -HEIGHT / 2;
 		while(y < HEIGHT / 2)
 		{
+
 			ft_calc_d(d, x, y);
+			if (r->x_angle != 0)
+				ft_rotation_x(r->x_angle, d);
+			if (r->y_angle != 0)
+				ft_rotation_y(r->y_angle, d);
+
 			ft_pixel_put(r->ws, x, y, ft_trace_ray(r, d, 0.0001, INF));
 			y++;
 		}

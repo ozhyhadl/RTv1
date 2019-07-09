@@ -6,7 +6,7 @@
 /*   By: ozhyhadl <ozhyhadl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 00:06:35 by ozhyhadl          #+#    #+#             */
-/*   Updated: 2019/07/03 18:58:12 by ozhyhadl         ###   ########.fr       */
+/*   Updated: 2019/07/09 21:37:15 by ozhyhadl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int		cmx(char **tmp)
 		}
 	return (i);
 }
+
 int		c_rgb(int r, int g, int b)
 {
 	if ((r >= 0 && r <= 255) && (g >= 0 && g <= 255) && (b >= 0 && b <= 255))
@@ -51,17 +52,19 @@ int		c_rgb(int r, int g, int b)
 	ft_putstr("RGB is not valid\n");
 	return (1);
 }
+
 int		check_spher(char **tmp, t_rtv *r)
 {
 	t_spher *new;
 
-	new = malloc(sizeof(t_spher));
-	if (cmx (tmp) != 9 || c_rgb(ft_atoi(tmp[4]), ft_atoi(tmp[5]), ft_atoi(tmp[6])))
+	if (cmx (tmp) != 8 || c_rgb(ft_atoi(tmp[4]), ft_atoi(tmp[5]), ft_atoi(tmp[6])) ||\
+		ft_atoi(tmp[7]) < 1)
 		return (1);
+	new = malloc(sizeof(t_spher));
 	INCOR(new->center, ft_atoi(tmp[1]), ft_atoi(tmp[2]), ft_atoi(tmp[3]));
 	INCOR(new->color, ft_atoi(tmp[4]), ft_atoi(tmp[5]), ft_atoi(tmp[6]));
 	new->radius = ft_atoi(tmp[7]);
-	new->specular = ft_atoi(tmp[8]);
+	new->specular = 15;
 	if (r->spher == NULL)
 	{
 		r->spher = new;
@@ -70,5 +73,77 @@ int		check_spher(char **tmp, t_rtv *r)
 	}
 	new->next = r->spher;
 	r->spher = new;
+	return (0);
+}
+
+int		check_plane(char **tmp, t_rtv *r)
+{
+	t_plane *new;
+
+	if (cmx (tmp) != 10 || c_rgb(ft_atoi(tmp[4]), ft_atoi(tmp[5]), ft_atoi(tmp[6])))
+		return (1);
+	new = malloc(sizeof(t_plane));
+	INCOR(new->center, ft_atoi(tmp[1]), ft_atoi(tmp[2]), ft_atoi(tmp[3]));
+	INCOR(new->color, ft_atoi(tmp[4]), ft_atoi(tmp[5]), ft_atoi(tmp[6]));
+	INCOR(new->vec, ft_atoi(tmp[7]), ft_atoi(tmp[8]), ft_atoi(tmp[9]));
+	new->specular = 100000000;
+	if (r->plane == NULL)
+	{
+		r->plane = new;
+		new->next = NULL;
+		return (0);
+	}
+	new->next = r->plane;
+	r->plane = new;
+	return (0);
+}
+
+int		check_cilindr(char **tmp, t_rtv *r)
+{
+	t_cilindr *new;
+
+	if (cmx (tmp) != 11 || c_rgb(ft_atoi(tmp[4]), ft_atoi(tmp[5]), ft_atoi(tmp[6]))\
+		|| ft_atoi(tmp[10]) < 1)
+		return (1);
+	new = malloc(sizeof(t_cilindr));
+	INCOR(new->start, ft_atoi(tmp[1]), ft_atoi(tmp[2]), ft_atoi(tmp[3]));
+	INCOR(new->color, ft_atoi(tmp[4]), ft_atoi(tmp[5]), ft_atoi(tmp[6]));
+	INCOR(new->vec, ft_atoi(tmp[7]), ft_atoi(tmp[8]), ft_atoi(tmp[9]));
+	new->specular = 100;
+	ft_normalization(new->vec);
+	new->radius = ft_atoi(tmp[10]);
+
+	if (r->cilindr == NULL)
+	{
+		r->cilindr = new;
+		new->next = NULL;
+		return (0);
+	}
+	new->next = r->cilindr;
+	r->cilindr = new;
+	return (0);
+}
+
+int		check_cone(char **tmp, t_rtv *r)
+{
+	t_cone *new;
+
+	if (cmx (tmp) != 10 || c_rgb(ft_atoi(tmp[4]), ft_atoi(tmp[5]), ft_atoi(tmp[6])))
+		return (1);
+	new = malloc(sizeof(t_cone));
+	INCOR(new->start, ft_atoi(tmp[1]) / 38, ft_atoi(tmp[2]) / 38, ft_atoi(tmp[3]));
+	INCOR(new->color, ft_atoi(tmp[4]), ft_atoi(tmp[5]), ft_atoi(tmp[6]));
+	INCOR(new->vec, ft_atoi(tmp[7]), ft_atoi(tmp[8]), ft_atoi(tmp[9]));
+	new->specular = 1000;
+	ft_normalization(new->vec);
+	new->tang = tan(180 / (180 * 3.14));
+	if (r->cone == NULL)
+	{
+		r->cone = new;
+		new->next = NULL;
+		return (0);
+	}
+	new->next = r->cone;
+	r->cone = new;
 	return (0);
 }
