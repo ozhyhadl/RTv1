@@ -6,7 +6,7 @@
 /*   By: ozhyhadl <ozhyhadl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/22 18:45:55 by ozhyhadl          #+#    #+#             */
-/*   Updated: 2019/07/08 21:47:05 by ozhyhadl         ###   ########.fr       */
+/*   Updated: 2019/07/13 03:52:23 by ozhyhadl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_cilind_light(t_rtv *r, t_cilindr *cilindr, double lim, double *d)
 	double		tmp_d[3];
 	double		t;
 
-	MUL13(tm, cilindr->t, d);
+	MUL13(tm, lim, d);
 	ADD3(tm, r->cam->o, tm);
 	SUB3(tm, tm, cilindr->start);
 	t = ft_dot_p(tm, cilindr->vec);
@@ -41,7 +41,7 @@ int	ft_cilind_light(t_rtv *r, t_cilindr *cilindr, double lim, double *d)
 	return (int_color);
 }
 
-double		ft_calc_cilindr(t_rtv *r, double *d, double *p, t_cilindr *c)
+double		ft_calc_cilindr(double *d, double *p, t_cilindr *c)
 {
 	double	discrim;
 	double	k1;
@@ -59,8 +59,8 @@ double		ft_calc_cilindr(t_rtv *r, double *d, double *p, t_cilindr *c)
 	t[0] = (-k2 + sqrt(discrim)) / (2 * k1);
 	t[1] = (-k2 - sqrt(discrim)) / (2 * k1);
 	if (t[0] < t[1])
-		return(c->t = t[0]);
-	return (c->t = t[1]);
+		return(t[0]);
+	return (t[1]);
 }
 
 double		all_cilindr(t_rtv *r, double *d, double *p, t_cilindr *c)
@@ -74,11 +74,10 @@ double		all_cilindr(t_rtv *r, double *d, double *p, t_cilindr *c)
 	while (tmp_cilindr != NULL)
 	{
 		
-		if ((tmp = ft_calc_cilindr(r, d, p, c)) < min && tmp > 0.001)
+		if ((tmp = ft_calc_cilindr(d, p, c)) < min && tmp > 0.001)
 		{
 			min = tmp;
 			r->cilindr_choose = tmp_cilindr;
-			r->cilindr_choose->t = tmp;
 		}
 		tmp_cilindr = tmp_cilindr->next;
 	}

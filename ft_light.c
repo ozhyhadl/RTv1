@@ -6,7 +6,7 @@
 /*   By: ozhyhadl <ozhyhadl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 18:30:02 by ozhyhadl          #+#    #+#             */
-/*   Updated: 2019/07/09 19:44:02 by ozhyhadl         ###   ########.fr       */
+/*   Updated: 2019/07/13 03:27:43 by ozhyhadl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,35 +27,6 @@ double		ft_calc_specular(double *n, t_rtv *r, double *v, double *vec)
 	return (i);
 }
 
-// t_spher		*ft_isshadow(t_rtv *r, double *d, double max, double *p)
-// {
-// 	t_spher		*tmp[2];
-// 	double		tn[2];
-// 	double		min;
-// 	double		lim;
-	
-// 	min = 0.0001;
-// 	lim = INF;
-// 	tmp[0] = r->spher;
-// 	tmp[1] = NULL;
-// 	while (tmp[0] != NULL)
-// 	{
-// 		ft_trace_calc(p, d, tn, tmp[0]);
-// 		if (tn[0] < lim && min < tn[0] && tn[0] < max)
-// 		{
-// 			lim = tn[0];
-// 			tmp[1] = tmp[0];
-// 		}
-// 		if (tn[1] < lim && min < tn[1] && tn[1] < max)
-// 		{
-// 			lim = tn[1];
-// 			tmp[1] = tmp[0];
-// 		}
-// 		tmp[0] = tmp[0]->next;
-// 	}
-// 	return(tmp[1]);
-// }
-
 double		ft_calc_light_2(double *p, double *n, t_rtv *r, double *vec)
 {
 	double i;
@@ -66,18 +37,8 @@ double		ft_calc_light_2(double *p, double *n, t_rtv *r, double *vec)
 
 	l = r->light_choose;
 	i = 0;
-
-	// if (l->type == 'd')
-	// {
-	// 	INCOR(vec, l->pos[0] + 1, l->pos[1] + 1, l->pos[2] * -1);
-	// 	max = INF;
-	// }
-	if (l->type == 'p')
-	{
-		SUB3(vec, l->pos, p);
-		max = 1;
-	}
-	
+	SUB3(vec, l->pos, p);
+	max = 1;
 	if (ft_quadratic(r, vec, max, p) >= max && all_plane(r, vec, p) >= max && all_cilindr(r, vec, p, r->cilindr) >= max && all_cone(r, vec, p, r->cone) >= max)
 		if ((dot = ft_dot_p(n, vec)) > 0)
 		{

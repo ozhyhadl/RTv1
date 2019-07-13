@@ -6,7 +6,7 @@
 /*   By: ozhyhadl <ozhyhadl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 18:22:10 by ozhyhadl          #+#    #+#             */
-/*   Updated: 2019/07/09 21:35:20 by ozhyhadl         ###   ########.fr       */
+/*   Updated: 2019/07/13 03:31:13 by ozhyhadl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ typedef struct			s_spher
 	double				center[3];
 	int					color[3];
 	double				specular;
-	double				t;
 	int					radius;
 	struct s_spher		*next;
 }						t_spher;
@@ -69,7 +68,6 @@ typedef struct			s_plane
 	double				center[3];
 	int					color[3];
 	double				specular;
-	double				t;
 	double				vec[3];
 	struct s_plane		*next;
 }						t_plane;
@@ -82,7 +80,6 @@ typedef struct 			s_cilindr
 	double				specular;
 	double				vec[3];
 	int					radius;
-	double				t;
 	struct s_cilindr	*next;
 }						t_cilindr;
 
@@ -94,7 +91,6 @@ typedef struct 			s_cone
 	double				specular;
 	double				vec[3];
 	double				tang;
-	double				t;
 	struct s_cone		*next;
 }						t_cone;
 
@@ -106,20 +102,6 @@ typedef struct			s_light
 	int					pos[3];
 	struct s_light		*next;
 }						t_light;
-
-// typedef struct			s_add
-// {
-// 	double				start[3];
-// 	int					color[3];
-// 	double				specular;
-// 	double				end[3];
-// 	double				vec[3];
-// 	double				tang;
-// 	double				t;
-// 	double				normal[3];
-// 	int					radius;
-// 	double				center[3];
-// }						t_add;
 
 typedef struct			s_rtv
 {
@@ -148,20 +130,20 @@ void					ft_trace_calc(double *c, double *d, double *t, t_spher *spher);
 void					ft_normalization(double *n);
 double					all_plane(t_rtv *r, double *d, double *p);
 int						ft_plane_light(t_rtv *r, t_plane *figure, double lim, double *d);
-double					ft_calc_cilindr(t_rtv *r, double *d, double *p, t_cilindr *c);
+double					ft_calc_cilindr(double *d, double *p, t_cilindr *c);
 int						ft_trace_r2(t_rtv *r, void *figure, double lim, double *d);
 double					all_cilindr(t_rtv *r, double *d, double *p, t_cilindr *c);
 int						ft_cilind_light(t_rtv *r, t_cilindr *cilindr, double lim, double *d);
 double					all_cone(t_rtv *r, double *d, double *p, t_cone *c);
-double					ft_calc_cone(t_rtv *r, double *d, double *p, t_cone *c);
+double					ft_calc_cone( double *d, double *p, t_cone *c);
 int						ft_cone_light(t_rtv *r, t_cone *cone, double lim, double *d);
 int						check_spher(char **tmp, t_rtv *r);
 int						main_parse(char *argv, t_rtv *r);
 int						check_plane(char **tmp, t_rtv *r);
 int						check_cilindr(char **tmp, t_rtv *r);
 int						check_cone(char **tmp, t_rtv *r);
-
+int						check_light(char **tmp, t_rtv *r);
+void					check_intensity(t_rtv *r);
 void					ft_rotation_x(double rad, double *dir);
 void					ft_rotation_y(double rad, double *dir);
-void					ft_rotation_z(double rad, double *dir);
 #endif

@@ -6,7 +6,7 @@
 /*   By: ozhyhadl <ozhyhadl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 19:02:18 by ozhyhadl          #+#    #+#             */
-/*   Updated: 2019/07/09 20:04:32 by ozhyhadl         ###   ########.fr       */
+/*   Updated: 2019/07/13 03:26:29 by ozhyhadl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	ft_plane_light(t_rtv *r, t_plane *figure, double lim, double *d)
 	double		p[3];
 	double		n[3];
 	double		tm[3];
-	double		len_n;
 	double		i;
 	int			color[3];
 	int			int_color;
@@ -41,7 +40,6 @@ int	ft_plane_light(t_rtv *r, t_plane *figure, double lim, double *d)
 double	ft_plane_calc(t_plane *plane, double *d, double *p)
 {
 	double	oc[3];
-	double	dv[3];
 	double	k1;
 	double	k2;
 	double	n[3];

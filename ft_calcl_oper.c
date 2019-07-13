@@ -6,7 +6,7 @@
 /*   By: ozhyhadl <ozhyhadl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 16:18:16 by ozhyhadl          #+#    #+#             */
-/*   Updated: 2019/07/09 00:03:18 by ozhyhadl         ###   ########.fr       */
+/*   Updated: 2019/07/13 03:42:25 by ozhyhadl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,3 @@ void	ft_rotation_y(double rad, double *dir)
 	dir[2] = -x * sin(rad) + dir[2] * cos(rad);
 }
 
-void	ft_rotation_z(double rad, double *dir)
-{
-	double x;
-
-		x = dir[0];
-	dir[0] = x * cos(rad) - dir[1] * sin(rad);
-	dir[1] = x * sin(rad) + dir[1] * cos(rad);
-}

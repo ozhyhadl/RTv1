@@ -6,7 +6,7 @@
 /*   By: ozhyhadl <ozhyhadl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 00:06:35 by ozhyhadl          #+#    #+#             */
-/*   Updated: 2019/07/09 21:37:15 by ozhyhadl         ###   ########.fr       */
+/*   Updated: 2019/07/13 03:16:06 by ozhyhadl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,3 +147,52 @@ int		check_cone(char **tmp, t_rtv *r)
 	r->cone = new;
 	return (0);
 }
+
+void	check_intensity(t_rtv *r)
+{
+	t_light	*tmp_l;
+	double	i;
+
+	tmp_l = r->light;
+	i = 0;
+	while (tmp_l != NULL)
+	{
+		i += tmp_l->intensity;
+		tmp_l = tmp_l->next;
+	}
+	while (i >= 1)
+	{
+		tmp_l = r->light;
+		i = 0;
+		while (tmp_l != NULL)
+		{
+			if (tmp_l->type == 'p')
+				tmp_l->intensity *= 0.9;
+			i += tmp_l->intensity;
+			tmp_l = tmp_l->next;
+		}
+	}
+}
+
+int		check_light(char **tmp, t_rtv *r)
+{
+	t_light	*new;
+
+
+	if (cmx(tmp) != 5 || ft_atoi(tmp[4]) < 0 || ft_atoi(tmp[4]) > 10)
+		return (1);
+	new = malloc(sizeof(t_light));
+	INCOR(new->pos, ft_atoi(tmp[1]), ft_atoi(tmp[2]), ft_atoi(tmp[3]));
+	new->intensity = ft_atoi(tmp[4]) * 0.1;
+	new->type = 'p';
+	if (r->light == NULL)
+	{
+		r->light = new;
+		new->next = NULL;
+		return (0);
+	}
+	new->next = r->light;
+	r->light = new;
+	return (0);
+}
+

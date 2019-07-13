@@ -6,7 +6,7 @@
 /*   By: ozhyhadl <ozhyhadl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 19:34:57 by ozhyhadl          #+#    #+#             */
-/*   Updated: 2019/07/08 21:47:02 by ozhyhadl         ###   ########.fr       */
+/*   Updated: 2019/07/13 03:45:06 by ozhyhadl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_cone_light(t_rtv *r, t_cone *cone, double lim, double *d)
 	double		tmp_d[3];
 	double		t;
 
-	MUL13(tm, cone->t, d);
+	MUL13(tm, lim, d);
 	ADD3(tm, r->cam->o, tm);
 	SUB3(tm, tm, cone->start);
 	t = ft_dot_p(tm, tm) / ft_dot_p(tm, cone->vec);
@@ -41,7 +41,7 @@ int	ft_cone_light(t_rtv *r, t_cone *cone, double lim, double *d)
 	return (int_color);
 }
 
-double		ft_calc_cone(t_rtv *r, double *d, double *p, t_cone *c)
+double		ft_calc_cone(double *d, double *p, t_cone *c)
 {
 	double	discrim;
 	double	k1;
@@ -59,8 +59,8 @@ double		ft_calc_cone(t_rtv *r, double *d, double *p, t_cone *c)
 	t[0] = (-k2 + sqrt(discrim)) / (2 * k1);
 	t[1] = (-k2 - sqrt(discrim)) / (2 * k1);
 	if (t[0] < t[1])
-		return(c->t = t[0]);
-	return (c->t = t[1]);
+		return(t[0]);
+	return (t[1]);
 }
 
 double		all_cone(t_rtv *r, double *d, double *p, t_cone *c)
@@ -73,11 +73,10 @@ double		all_cone(t_rtv *r, double *d, double *p, t_cone *c)
 	tmp_cone = c;
 	while (tmp_cone != NULL)
 	{	
-		if ((tmp = ft_calc_cone(r, d, p, c)) < min && tmp > 0.001)
+		if ((tmp = ft_calc_cone(d, p, c)) < min && tmp > 0.001)
 		{
 			min = tmp;
 			r->cone_choose = tmp_cone;
-			r->cone_choose->t = tmp;
 		}
 		tmp_cone = tmp_cone->next;
 	}
