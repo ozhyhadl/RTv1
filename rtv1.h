@@ -6,7 +6,7 @@
 /*   By: ozhyhadl <ozhyhadl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 18:22:10 by ozhyhadl          #+#    #+#             */
-/*   Updated: 2019/07/13 03:31:13 by ozhyhadl         ###   ########.fr       */
+/*   Updated: 2019/07/16 15:07:42 by ozhyhadl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 # define HEIGHT 720
 # define WIDTH 720
-# define INF 999999
+# define INF 100000000000
 # define INCOR(mas, x, y, z) mas[0] = x; mas[1] = y; mas[2] = z;
 # define ADD3(res, x1, x2) res[0] = x1[0] + x2[0]; res[1] = x1[1] + x2[1]; res[2] = x1[2] + x2[2];
 # define SUB3(res, x1, x2) res[0] = x1[0] - x2[0]; res[1] = x1[1] - x2[1]; res[2] = x1[2] - x2[2];

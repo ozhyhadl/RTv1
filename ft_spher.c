@@ -6,7 +6,7 @@
 /*   By: ozhyhadl <ozhyhadl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 02:38:45 by ozhyhadl          #+#    #+#             */
-/*   Updated: 2019/07/08 22:16:00 by ozhyhadl         ###   ########.fr       */
+/*   Updated: 2019/07/16 16:56:42 by ozhyhadl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ double		ft_quadratic(t_rtv *r, double *d, double max, double *p)
 	double		tn[2];
 	double		min;
 
-	min = 0.0001;
+	min = 0.000000000001;
 	tmp[0] = r->spher;
 	tmp[1] = NULL;
 	while (tmp[0] != NULL)

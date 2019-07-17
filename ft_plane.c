@@ -6,7 +6,7 @@
 /*   By: ozhyhadl <ozhyhadl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 19:02:18 by ozhyhadl          #+#    #+#             */
-/*   Updated: 2019/07/13 03:26:29 by ozhyhadl         ###   ########.fr       */
+/*   Updated: 2019/07/16 17:04:17 by ozhyhadl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ double	ft_plane_calc(t_plane *plane, double *d, double *p)
 	MUL13(oc, -1, oc);
 	INCOR(n, plane->vec[0], plane->vec[1], plane->vec[2]);
 	ft_normalization(n);
-		if (ft_dot_p(d, n) > 0)
+		if (ft_dot_p(d, n) >= 0)
 		{
-		MUL13(plane->vec, -1, plane->vec);
+			MUL13(plane->vec, -1, plane->vec);
 		}
 	k1 = ft_dot_p(oc, n);
 	k2 = ft_dot_p(d, n);
@@ -70,7 +70,7 @@ double	all_plane(t_rtv *r, double *d, double *p)
 	while (tmp_plane != NULL)
 	{
 		
-		if ((tmp = ft_plane_calc(tmp_plane, d, p)) < min && tmp > 0.001)
+		if ((tmp = ft_plane_calc(tmp_plane, d, p)) <= min && tmp > 0.000000000000001)
 		{
 			min = tmp;
 			r->plane_choose = tmp_plane;

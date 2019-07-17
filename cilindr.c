@@ -6,7 +6,7 @@
 /*   By: ozhyhadl <ozhyhadl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/22 18:45:55 by ozhyhadl          #+#    #+#             */
-/*   Updated: 2019/07/13 03:52:23 by ozhyhadl         ###   ########.fr       */
+/*   Updated: 2019/07/17 18:49:56 by ozhyhadl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ double		all_cilindr(t_rtv *r, double *d, double *p, t_cilindr *c)
 	while (tmp_cilindr != NULL)
 	{
 		
-		if ((tmp = ft_calc_cilindr(d, p, c)) < min && tmp > 0.001)
+		if ((tmp = ft_calc_cilindr(d, p, tmp_cilindr)) < min && tmp > 0.000000000001)
 		{
 			min = tmp;
 			r->cilindr_choose = tmp_cilindr;

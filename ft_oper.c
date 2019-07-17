@@ -6,7 +6,7 @@
 /*   By: ozhyhadl <ozhyhadl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 20:10:10 by ozhyhadl          #+#    #+#             */
-/*   Updated: 2019/07/13 03:29:07 by ozhyhadl         ###   ########.fr       */
+/*   Updated: 2019/07/16 16:55:58 by ozhyhadl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	ft_main_alg(t_rtv *r)
 				ft_rotation_x(r->x_angle, d);
 			if (r->y_angle != 0)
 				ft_rotation_y(r->y_angle, d);
-			ft_pixel_put(r->ws, x, y, ft_trace_ray(r, d, 0.0001, INF));
+			ft_pixel_put(r->ws, x, y, ft_trace_ray(r, d, 0.000000000001, INF));
 			y++;
 		}
 		x++;

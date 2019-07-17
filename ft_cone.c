@@ -6,7 +6,7 @@
 /*   By: ozhyhadl <ozhyhadl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 19:34:57 by ozhyhadl          #+#    #+#             */
-/*   Updated: 2019/07/13 03:45:06 by ozhyhadl         ###   ########.fr       */
+/*   Updated: 2019/07/17 18:50:18 by ozhyhadl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ double		ft_calc_cone(double *d, double *p, t_cone *c)
 		return (-1);
 	t[0] = (-k2 + sqrt(discrim)) / (2 * k1);
 	t[1] = (-k2 - sqrt(discrim)) / (2 * k1);
-	if (t[0] < t[1])
+	if (t[0] < t[1] && t[0] >= 0)
 		return(t[0]);
 	return (t[1]);
 }
@@ -73,7 +73,7 @@ double		all_cone(t_rtv *r, double *d, double *p, t_cone *c)
 	tmp_cone = c;
 	while (tmp_cone != NULL)
 	{	
-		if ((tmp = ft_calc_cone(d, p, c)) < min && tmp > 0.001)
+		if ((tmp = ft_calc_cone(d, p, tmp_cone)) < min && tmp > 0.000000000001)
 		{
 			min = tmp;
 			r->cone_choose = tmp_cone;
