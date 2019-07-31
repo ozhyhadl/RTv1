@@ -1,4 +1,0 @@
-spher "cord" x y z "color" R G B "radius" r
-plane "cord" x y z "color" R G B "vector" x y z
-cilindr "cord" x y z "color" R G B "vector" x y z "radius" r
-limits -999 999 > n < 999 999

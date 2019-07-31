@@ -6,7 +6,7 @@
 /*   By: ozhyhadl <ozhyhadl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 19:29:03 by ozhyhadl          #+#    #+#             */
-/*   Updated: 2018/12/26 02:59:58 by ozhyhadl         ###   ########.fr       */
+/*   Updated: 2019/07/18 20:24:03 by ozhyhadl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,6 @@ void				ft_lstpush(t_list *lst, t_list *newlst);
 t_list				*ft_lstnexti(t_list *lst, size_t i);
 t_list				*ft_lstdelvoid(t_list *lst, void const *c);
 int					get_next_line(const int fd, char **line);
-void                ft_del_two_char(char ***tmp);
+void				ft_del_two_char(char ***tmp);
 
 #endif

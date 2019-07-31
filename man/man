@@ -1,0 +1,35 @@
+											MANUAL Rtv1
+											
+*Limits*
+
+		Position\Vector\Normal\Angle.... -999 999 -> 999 999
+		RGB............................. 0 -> 255
+		Light intensity................. 0 -> 10
+		Radius.......................... 0 -> 999 999
+
+*Add to the scene*
+
+		spher   "Position" x y z   "RGB" r g b   "Radius" r
+		plane   "Position" x y z   "RGB" r g b   "Normal" n
+		cone    "Position" x y z   "RGB" r g b   "Vector" x y z
+		cylindr "Position" x y z   "RGB" r g b   "Vector" x y z   "Radius" r
+		light   "Position" x y z   "Intensity" i
+		cam     "Position" x y z   "Angle" x y
+
+*Example*
+
+		spher   0 10 10   255 0 0   1
+		plane   0 0 0   123 123 123   0 1 0
+		cone    0 20 20   0 255 0   0 1 0
+		cylindr -20 20 0   0 0 255   1 0 0   1
+		light   -10 10 -10   5
+		light   10 10 -10   5
+		cam     0 20 -20   0 0
+
+*Important*
+
+		- Don't break the program ;)
+		- 'W' 'A' 'S' 'D' - Change camera angle
+		- You can add multiple light sources
+		- Spaces in scenes file are ignored
+		- The prepared scenes in the folder "scene" (./RTv1 scene/<name file>)
